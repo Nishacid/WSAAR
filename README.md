@@ -242,6 +242,7 @@ Execution completed, good luck for the next steps :)
 - [ ] Code cleaning 
 - [ ] Improve login.py script (dirty)
 - [ ] Add news labs / and missing vulnerabilities 
+- [ ] Add carlos:montoya login check
 
 ## ❤️ Contributing
 

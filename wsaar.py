@@ -68,6 +68,7 @@ def set_session(host):
         return session
     except requests.ConnectionError:    
         print(colored("[!] The Web-Security Academy Lab seems down !", "red"))
+        sys.exit()
         
 
 if __name__ == "__main__":
@@ -189,5 +190,6 @@ if __name__ == "__main__":
             print("\n Execution completed, good luck for the next steps :)")
         else:
             print(colored("[!] It doesn't look like a lab ID !", "red"))
+            sys.exit()
     except KeyboardInterrupt:
         print("Bye.")
