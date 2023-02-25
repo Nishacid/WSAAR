@@ -2,7 +2,7 @@
 
 Auto-Recon script that will help you in the [Burp Suite Certified Practitioner Exam](https://portswigger.net/web-security/certification) or with any [web-security lab](https://portswigger.net/web-security/all-labs).
 
-Wordlists provided in [./wordlists/] directory are these provided by **Web Security Academy** here : 
+Wordlists provided in [wordlists](./wordlists/) directory are these provided by **Web Security Academy** here : 
 
 - [Username list](https://portswigger.net/web-security/authentication/auth-lab-usernames)
 - [Password list](https://portswigger.net/web-security/authentication/auth-lab-passwords)
