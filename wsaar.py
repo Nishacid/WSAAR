@@ -23,7 +23,7 @@ from xss import *
 from cors import *
 from upload import *
 from deserialization import *
-from websockets import *
+from websocket_checks import *
 from access_control import *
 from business_logic import *
 from information_disclosure import *
@@ -52,6 +52,7 @@ def parseArgs():
     parser.add_argument("--id", "-i", dest="host", default=None, help="Your Lab ID", required=True)
     parser.add_argument("--username", "-u", dest="username", default=None, help="Username for login", required=False)
     parser.add_argument("--password", "-p", dest="password", default=None, help="Password for login", required=False)
+    parser.add_argument("--burp", "-b", action="store_true", default=None, help="Use burp proxy", required=False)
     # parser.add_argument("--headers", "-p", dest="headers", default=None, help="HTTP Header", required=False) -> todo
     return parser.parse_args()
 
@@ -59,6 +60,21 @@ def set_session(host):
     try:
         # Do first request
         session = requests.Session()
+        
+        if options.burp:
+            print('Using burp proxy')
+            proxy_url = 'http://127.0.0.1:8080'
+            session.verify = False
+            import warnings
+            import urllib3
+            # Suppress InsecureRequestWarning
+            warnings.filterwarnings("ignore", message="Unverified HTTPS request", category=urllib3.exceptions.InsecureRequestWarning)
+
+            session.proxies = {
+                "http": proxy_url,
+                "https": proxy_url
+                }
+
         r = session.get(f"https://{host}.web-security-academy.net/", allow_redirects=False)
         
         if r.status_code == 504:
@@ -66,7 +82,8 @@ def set_session(host):
             sys.exit()
             
         return session
-    except requests.ConnectionError:    
+
+    except requests.ConnectionError:
         print(colored("[!] The Web-Security Academy Lab seems down !", "red"))
         sys.exit()
         

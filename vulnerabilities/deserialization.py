@@ -24,10 +24,18 @@ def deserialization(cookies):
         # some patterns
         ruby_pattern = "BAhv" # Ruby Object
         php_pattern = "O:" # PHP Object
+        java_pattern = "rO0"
+        java_gzipped_pattern = "H4sIAAAAAAAA"
 
         if re.match(php_pattern, deserialized):
             print(colored(f"[+] PHP Object found : {deserialized}", "green"))
         elif re.match(ruby_pattern, serialized):
             print(colored(f"[+] Ruby Serialized Object found : {serialized}", "green"))
+        elif re.match(java_pattern, serialized):
+            print(colored(f"[+] Java Serialized Object found : {serialized}", "green"))
+            print(colored(f"\t Try to use ysoserial", "green"))
+        elif re.match(java_gzipped_pattern, serialized):
+            print(colored(f"\t Try to use ysoserial, remembr to gzip cookie before encoding in base64", "green"))
+
     except :
         pass

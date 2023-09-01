@@ -44,9 +44,9 @@ def search_page(host, session):
     for path in advanced_search:
         r = session.get(f"https://{host}.web-security-academy.net/{path}")
         if r.status_code == 302:
-        print(colored("[+] Possible Advanced Search page on /{path}", "green"))
+            print(colored("[+] Possible Advanced Search page on /{path}", "green"))
         elif r.status_code == 200:
-        print(colored("[+] Advanced Search page on /{path}", "green"))
+            print(colored("[+] Advanced Search page on /{path}", "green"))
 
 # Check for comments 
 def is_comments(host, session):
