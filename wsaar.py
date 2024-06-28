@@ -115,17 +115,21 @@ if __name__ == "__main__":
             exploit_server(lab_id, session)
             is_newsletter(lab_id, session)
 
-            # Login Check
-            #print("\n[*] Login Check...")
-            #login(lab_id, username, password)
             
             print("\n[*] Non-session Cookies Check...")
             odd_cookies(lab_id, session)
+            
+            # Login Check
+            print("\n[*] Login Check...")
+            #login(lab_id, username, password)
+
             # Vulnerabilites Check
+            
             # Deserialization Check
             #print("\n[*] Deserialization Check...")
             deserialization(login(lab_id, username, password, session))
 
+            
             # CORS check 
             print("\n[*] CORS Check...")
             cors_subdomains(lab_id, session)
