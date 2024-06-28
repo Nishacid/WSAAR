@@ -12,25 +12,24 @@ import sys
 from pwn import error
 from termcolor import colored
 # Local Imports
-sys.path.append('./vulnerabilities')
-from lfi import *
-from oauth import *
-from login import *
-from sqli import *
-from ssrf import *
-from xxe import * 
-from xss import *
-from cors import *
-from upload import *
-from deserialization import *
-from websocket_checks import *
-from access_control import *
-from business_logic import *
-from information_disclosure import *
-from web_cache_poisoning import *
-from request_smuggling import *
-from prototype_pollution import *
-from enumeration import *
+from vulnerabilities.lfi import *
+from vulnerabilities.oauth import *
+from vulnerabilities.login import *
+from vulnerabilities.sqli import *
+from vulnerabilities.ssrf import *
+from vulnerabilities.xxe import * 
+from vulnerabilities.xss import *
+from vulnerabilities.cors import *
+from vulnerabilities.upload import *
+from vulnerabilities.deserialization import *
+from vulnerabilities.websocket_checks import *
+from vulnerabilities.access_control import *
+from vulnerabilities.business_logic import *
+from vulnerabilities.information_disclosure import *
+from vulnerabilities.web_cache_poisoning import *
+from vulnerabilities.request_smuggling import *
+from vulnerabilities.prototype_pollution import *
+from vulnerabilities.enumeration import *
 
 # Banner
 def banner():
@@ -55,6 +54,7 @@ def parseArgs():
     parser.add_argument("--burp", "-b", action="store_true", default=None, help="Use burp proxy", required=False)
     # parser.add_argument("--headers", "-p", dest="headers", default=None, help="HTTP Header", required=False) -> todo
     return parser.parse_args()
+
 
 def set_session(host):
     try:
@@ -116,9 +116,11 @@ if __name__ == "__main__":
             is_newsletter(lab_id, session)
 
             # Login Check
-            print("\n[*] Login Check...")
+            #print("\n[*] Login Check...")
             #login(lab_id, username, password)
             
+            print("\n[*] Non-session Cookies Check...")
+            odd_cookies(lab_id, session)
             # Vulnerabilites Check
             # Deserialization Check
             #print("\n[*] Deserialization Check...")

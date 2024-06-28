@@ -6,7 +6,7 @@
 import requests
 import re
 import json
-import cors
+import vulnerabilities.cors
 from bs4 import BeautifulSoup
 from termcolor import colored
 
@@ -116,7 +116,7 @@ def login(host, username, password, session):
                 # get cookies
                 lab_cookies = session.cookies.get_dict()
                 session_cookie = lab_cookies['session']
-                print(colored(f"[*] Cookies are : {lab_cookies}", "green"))
+                print(colored(f"[*] Post-login cookies are : {lab_cookies}", "green"))
                 if session_cookie.startswith("eyJ"):
                     print(colored("[*] The cookies is a JSON web tokens (JWT)", "green"))
                 
