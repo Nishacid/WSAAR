@@ -103,10 +103,11 @@ def odd_cookies(lab_id, session):
     anchors = soup.findAll('a')
     for anchor in anchors:
         link=anchor.attrs.get('href')
+        if not link:
+            continue
         if link.startswith('http://') or link.startswith('https://'):
             continue
         session.get(url + link)
-        
     cookie_dict = session.cookies.get_dict()
     if 'session' in cookie_dict:
         cookie_dict.pop('session')
