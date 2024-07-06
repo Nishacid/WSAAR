@@ -4,7 +4,6 @@
 # Author            : Nishacid
 
 import re
-from requests import Session
 import json
 from bs4 import BeautifulSoup
 from termcolor import colored
@@ -58,7 +57,7 @@ def cors_header_check(requestHeaders):
             print(colored(f"[+] Highly possible CORS due to {headers} Header in response", "green"))
 
 # Trying to get potentially dynamic login path ('/hello' was seen before)
-def get_login_path(host, session: Session):
+def get_login_path(host, session):
     homepage = session.get(f'https://{host}.web-security-academy.net/')
     try:
         soup = BeautifulSoup(homepage.text, 'html.parser')
