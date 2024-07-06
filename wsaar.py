@@ -9,7 +9,7 @@ import re
 import argparse
 import sys
 # For better errors :)
-from pwn import error
+# from pwn import error
 from termcolor import colored
 # Local Imports
 from vulnerabilities.lfi import *
@@ -116,8 +116,6 @@ if __name__ == "__main__":
             is_newsletter(lab_id, session)
 
             
-            print("\n[*] Non-session Cookies Check...")
-            odd_cookies(lab_id, session)
             
             # Login Check
             print("\n[*] Login Check...")
@@ -129,6 +127,8 @@ if __name__ == "__main__":
             #print("\n[*] Deserialization Check...")
             deserialization(login(lab_id, username, password, session))
 
+            print("\n[*] Non-session Cookies Check...")
+            odd_cookies(lab_id, session)
             
             # CORS check 
             print("\n[*] CORS Check...")
