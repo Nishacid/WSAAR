@@ -3,7 +3,6 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import requests
 from termcolor import colored
 
 # Check for Path Traversal

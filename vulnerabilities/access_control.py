@@ -3,8 +3,6 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import re
-import requests
 from termcolor import colored
 
 # Checking for Transcript Script

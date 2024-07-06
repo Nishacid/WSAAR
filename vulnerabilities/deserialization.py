@@ -3,7 +3,6 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import requests
 import re
 import base64
 import urllib.parse
