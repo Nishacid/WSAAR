@@ -59,6 +59,7 @@ def is_comments(host, session):
         isComment = True
         print(colored("[+] Possibility to leave a comment on a post", "green"))
 
+
 # Check for feedback
 def is_feedback(host, session):
     # isFeedback ? 
@@ -94,3 +95,23 @@ def exploit_server(host, session):
                 print(colored(f"[+] Exploit server have an email server on {exploitServer_link}/email", "green"))
         except requests.ConnectionError:
             pass
+
+def odd_cookies(lab_id, session):
+    url = f'https://{lab_id}.web-security-academy.net/'
+    response = session.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    anchors = soup.findAll('a')
+    for anchor in anchors:
+        link=anchor.attrs.get('href')
+        if not link:
+            continue
+        if link.startswith('http://') or link.startswith('https://'):
+            continue
+        session.get(url + link)
+    cookie_dict = session.cookies.get_dict()
+    if 'session' in cookie_dict:
+        cookie_dict.pop('session')
+    if (len(cookie_dict) != 0):
+        print(colored(f"[*] Non-Session cookies are : {cookie_dict}", "green"))
+    else:
+        print(colored(f"[*] No Non-Session Cookies Were Found", "red"))

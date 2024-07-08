@@ -3,8 +3,6 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import websocket
-import requests
 import re
 from termcolor import colored
 

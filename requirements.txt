@@ -1,6 +1,9 @@
 websocket-client==1.2.3
 bs4==0.0.1
-lxml==4.8.0
+lxml==5.2.2
 requests==2.28.1
-pwntools==4.9.0
 termcolor==2.2.0
+
+# if you wanna use pwntools error when testing uncomment those as well as the line in wsaar.py
+# pyelftools==0.29
+# pwntools==4.9.0

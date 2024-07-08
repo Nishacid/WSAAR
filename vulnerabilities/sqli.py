@@ -3,7 +3,6 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import requests
 from bs4 import BeautifulSoup
 from termcolor import colored
 

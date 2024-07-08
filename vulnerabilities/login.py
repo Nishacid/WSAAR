@@ -3,10 +3,8 @@
 # Python Version    : 3.X
 # Author            : Nishacid
 
-import requests
 import re
 import json
-import cors
 from bs4 import BeautifulSoup
 from termcolor import colored
 
@@ -58,11 +56,27 @@ def cors_header_check(requestHeaders):
         if requestHeaders.get(headers):
             print(colored(f"[+] Highly possible CORS due to {headers} Header in response", "green"))
 
+# Trying to get potentially dynamic login path ('/hello' was seen before)
+def get_login_path(host, session):
+    homepage = session.get(f'https://{host}.web-security-academy.net/')
+    try:
+        soup = BeautifulSoup(homepage.text, 'html.parser')
+        account_anchor = soup.find("a", text='My account')
+        account_path = account_anchor.attrs.get('href')[1::]
+        login_path = session.get(f'https://{host}.web-security-academy.net/{account_path}', allow_redirects=True).url.split('/')[-1]
+        return [login_path]
+    except Exception:
+        return None
+
+
 # Let's perform a login request
 def login(host, username, password, session):
     user = "wiener"
     passwd = "peter"
-    login_path = ["login", "sign-in"]
+    login_path = get_login_path(host, session) 
+    # use the dynamic login path (if found), fall back to the defaults if not found, in case they randomize the link's innerHTML in the future
+    if not login_path: 
+        login_path = ["login", "sign-in"]
     for login in login_path:
         login_exist = session.get(f"https://{host}.web-security-academy.net/{login}")
         if login_exist.status_code == 200:
@@ -116,7 +130,7 @@ def login(host, username, password, session):
                 # get cookies
                 lab_cookies = session.cookies.get_dict()
                 session_cookie = lab_cookies['session']
-                print(colored(f"[*] Cookies are : {lab_cookies}", "green"))
+                print(colored(f"[*] Post-login cookies are : {lab_cookies}", "green"))
                 if session_cookie.startswith("eyJ"):
                     print(colored("[*] The cookies is a JSON web tokens (JWT)", "green"))
                 
